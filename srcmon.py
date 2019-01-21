@@ -1,6 +1,5 @@
 #!/usr/bin/python                                                                                                                 
-import sys, os, time, threading, subprocess, fnmatch
-import datetime
+import sys, os, time, threading, subprocess, fnmatch, datetime, signal
 
 #src https://jesper.borgstrup.dk/2011/10/restart-python-program-if-source-has-been-modified/
 
@@ -74,14 +73,5 @@ class SourceChangeMonitor(threading.Thread):
 
         self._process = subprocess.Popen( [sys.executable, self.PROGRAM] )
 
-def quit(signo, _frame):
-    print("Interrupted by %d, shutting down" % signo)
-    sys.exit()
-
-
 if __name__ == "__main__":
-    import signal
-    for sig in ('TERM', 'INT'):
-        signal.signal(getattr(signal, 'SIG'+sig), quit);
-
     SourceChangeMonitor().start()

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def get_df(symbol):
-    return pd.read_csv("{}.csv".format(symbol))
+    return pd.read_csv("data/{}.csv".format(symbol))
 
 def get_max_close(symbol):
     """Get max close"""
@@ -17,7 +17,7 @@ def plot_data(symbol):
     plt.show()
 
 def test_run():
-    for symbol in ["TSLA"]:
+    for symbol in ["AMZN"]:
         print("sample data")
         print(get_df(symbol).tail(10)[4:10])
         print (symbol, "52 weeks high", get_max_close(symbol))

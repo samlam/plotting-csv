@@ -14,3 +14,7 @@ python3 -m pip install -U matplotlib
 python3 srcmon.py readCsv.py
 ```
 
+
+readCsv.py - read from csv file and plot a chart
+createDf.py - read and join multiple csv into a single dataframe
+utilityRead.py - quiz on join df.join()

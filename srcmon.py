@@ -1,7 +1,7 @@
 #!/usr/bin/python                                                                                                                 
 import sys, os, time, threading, subprocess, fnmatch, datetime, signal
 
-#src https://jesper.borgstrup.dk/2011/10/restart-python-program-if-source-has-been-modified/
+#orig src https://jesper.borgstrup.dk/2011/10/restart-python-program-if-source-has-been-modified/
 
 class SourceChangeMonitor(threading.Thread):
 
@@ -20,11 +20,15 @@ class SourceChangeMonitor(threading.Thread):
     ROOT_DIRECTORY = r"."
 
     # Entry point program to run                                                                                         
-    PROGRAM = r"readCsv.py"
+    PROGRAM = "customScript.py"
 
     def __init__(self):
         threading.Thread.__init__(self)
         #self.this_script_name = os.path.abspath( sys.argv[0] )
+        if len(sys.argv) == 1:
+            print("Missing argument python filename")
+            sys.exit(1)
+        self.PROGRAM = sys.argv[1]
         self.this_script_name = os.path.basename(__file__)
         self.files = self.get_files()
         self.start_program()
